@@ -78,3 +78,48 @@ AI was used as a mentor and reviewer, not as an autopilot. I still implemented a
 
 ### AI usage reflection
 AI helped explain the React state update pattern, but I manually implemented and tested the behaviour. I also checked that the UI updates correctly before writing notes and committing the work.
+
+---
+
+## Step 3 — Forms & Controlled Components
+
+### What I used AI for
+- Planning the controlled form module.
+- Understanding how React controls input values using state.
+- Learning how `onChange`, `onSubmit`, and `event.preventDefault()` work.
+- Understanding the difference between local form state and parent task state.
+- Creating interview-style notes for forms and controlled components.
+
+### What I implemented myself
+- Updated the `Task` type to include priority.
+- Updated the initial task data.
+- Created the `TaskForm` component.
+- Added controlled input, textarea, and select fields.
+- Added basic title validation.
+- Connected the form to `DashboardPage` using the `onAddTask` prop.
+- Tested that new tasks appear in the list.
+- Tested that form reset, validation, toggle, and delete still work.
+
+### What I learned
+- Controlled components use React state as the source of truth.
+- `value` shows the current state value.
+- `onChange` updates state when the user types or selects a value.
+- `onSubmit` handles form submission.
+- `event.preventDefault()` stops the browser from refreshing the page.
+- Form validation can stop invalid data from being submitted.
+- Local state is useful for temporary form values.
+- Parent state is useful when multiple child components need shared data.
+- State can be lifted up to a common parent component.
+
+### What I should be able to explain in an interview
+- What a controlled component is.
+- Why controlled forms are useful.
+- How form state works in React.
+- How to handle input changes.
+- How to handle form submission.
+- Why `preventDefault()` is used.
+- How to add a new object to array state.
+- What lifting state up means.
+
+### AI usage reflection
+AI helped structure the form module and explain controlled components, but I manually implemented and tested the form behaviour. I checked that validation, task creation, form reset, and existing task actions worked before documenting and committing the step.

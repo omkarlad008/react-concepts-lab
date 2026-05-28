@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DashboardCard } from "../components/dashboard/DashboardCard";
+import { TaskForm } from "../components/tasks/TaskForm";
 import { TaskList } from "../components/tasks/TaskList";
 import { initialTasks } from "../data/initialTasks";
 import type { Task } from "../types/task";
@@ -7,35 +8,25 @@ import type { Task } from "../types/task";
 /**
  * DashboardPage is a page-level component.
  *
- * In Step 1, this page only displayed static dashboard cards.
- * In Step 2, we are adding state so the page can respond to user actions.
+ * It owns the task list state and passes data/functions
+ * down to child components through props.
  */
 export function DashboardPage() {
-  /**
-   * useState stores data that can change while the user interacts with the app.
-   *
-   * tasks is the current state value.
-   * setTasks is the function we use to update that state.
-   */
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
-  /**
-   * completedTasksCount is derived from the current tasks state.
-   *
-   * We do not need another useState for this because it can be calculated
-   * from existing state during render.
-   */
   const completedTasksCount = tasks.filter((task) => task.isCompleted).length;
-
   const activeTasksCount = tasks.length - completedTasksCount;
 
   /**
-   * handleToggleTask updates one task by changing its isCompleted value.
+   * handleAddTask receives a new task from TaskForm.
    *
-   * Important:
-   * We do not mutate the existing task directly.
-   * Instead, we create a new array using .map().
+   * We add the new task by creating a new array.
+   * This keeps the update immutable.
    */
+  function handleAddTask(newTask: Task) {
+    setTasks((currentTasks) => [newTask, ...currentTasks]);
+  }
+
   function handleToggleTask(taskId: string) {
     setTasks((currentTasks) =>
       currentTasks.map((task) =>
@@ -46,29 +37,18 @@ export function DashboardPage() {
     );
   }
 
-  /**
-   * handleDeleteTask removes one task from the state.
-   *
-   * Important:
-   * .filter() creates a new array, which keeps the update immutable.
-   */
   function handleDeleteTask(taskId: string) {
     setTasks((currentTasks) =>
       currentTasks.filter((task) => task.id !== taskId),
     );
   }
 
-  /**
-   * dashboardCards uses values calculated from state.
-   *
-   * When tasks changes, React re-renders this component and these values update.
-   */
   const dashboardCards = [
     {
       id: "concepts",
       title: "Concepts",
-      value: "8",
-      description: "React concepts practised across the first two modules.",
+      value: "12",
+      description: "React concepts practised across the first three modules.",
     },
     {
       id: "active-tasks",
@@ -87,11 +67,11 @@ export function DashboardPage() {
   return (
     <section className="dashboard-page">
       <div className="page-intro">
-        <p className="eyebrow">Module 2</p>
-        <h2>State, Events & Interactive UI</h2>
+        <p className="eyebrow">Module 3</p>
+        <h2>Forms & Controlled Components</h2>
         <p>
-          This step adds interactivity. We can now update the UI by changing
-          React state when the user clicks a button.
+          This step adds a form. The input values are controlled by React state,
+          and submitting the form adds a new task to the dashboard.
         </p>
       </div>
 
@@ -105,6 +85,8 @@ export function DashboardPage() {
           />
         ))}
       </div>
+
+      <TaskForm onAddTask={handleAddTask} />
 
       <section className="tasks-section">
         <div className="section-heading">

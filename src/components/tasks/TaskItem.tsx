@@ -16,11 +16,19 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
   return (
     <article className="task-item">
       <div className="task-item-content">
-        <span
-          className={`task-status ${task.isCompleted ? "completed" : "active"}`}
-        >
-          {task.isCompleted ? "Completed" : "Active"}
-        </span>
+        <div className="task-badges">
+          <span
+            className={`task-status ${
+              task.isCompleted ? "completed" : "active"
+            }`}
+          >
+            {task.isCompleted ? "Completed" : "Active"}
+          </span>
+
+          <span className={`priority-badge ${task.priority}`}>
+            {task.priority}
+          </span>
+        </div>
 
         <h3>{task.title}</h3>
         <p>{task.description}</p>

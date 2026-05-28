@@ -23,8 +23,8 @@ The goal of this project is to learn React deeply by implementing one concept at
 - `children` prop
 - List rendering
 - `key` prop
-
 - State
+- 
 - `useState`
 - Event handlers
 - Immutable updates
@@ -32,8 +32,16 @@ The goal of this project is to learn React deeply by implementing one concept at
 - Passing functions as props
 - Derived state
 - Conditional rendering
-
-More concepts will be added step by step.
+- 
+- Controlled components
+- Form state
+- `onChange`
+- `onSubmit`
+- `event.preventDefault()`
+- Form validation
+- Adding items to array state
+- Local state vs parent state
+- Lifting state up
 
 More concepts will be added step by step.
 
