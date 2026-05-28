@@ -24,6 +24,17 @@ The goal of this project is to learn React deeply by implementing one concept at
 - List rendering
 - `key` prop
 
+- State
+- `useState`
+- Event handlers
+- Immutable updates
+- Updating arrays in state
+- Passing functions as props
+- Derived state
+- Conditional rendering
+
+More concepts will be added step by step.
+
 More concepts will be added step by step.
 
 ## How to Run
