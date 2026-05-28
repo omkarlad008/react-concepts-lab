@@ -1,28 +1,42 @@
 import { useState } from "react";
 import { DashboardCard } from "../components/dashboard/DashboardCard";
+import { TaskFilterControls } from "../components/tasks/TaskFilterControls";
 import { TaskForm } from "../components/tasks/TaskForm";
 import { TaskList } from "../components/tasks/TaskList";
 import { initialTasks } from "../data/initialTasks";
-import type { Task } from "../types/task";
+import type { Task, TaskFilter } from "../types/task";
 
 /**
- * DashboardPage is a page-level component.
+ * DashboardPage owns the main task state.
  *
- * It owns the task list state and passes data/functions
- * down to child components through props.
+ * In Step 4, we add selectedFilter state to control which tasks
+ * are visible without changing the original tasks array.
  */
 export function DashboardPage() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [selectedFilter, setSelectedFilter] = useState<TaskFilter>("all");
 
   const completedTasksCount = tasks.filter((task) => task.isCompleted).length;
   const activeTasksCount = tasks.length - completedTasksCount;
 
   /**
-   * handleAddTask receives a new task from TaskForm.
+   * filteredTasks is a derived array.
    *
-   * We add the new task by creating a new array.
-   * This keeps the update immutable.
+   * We do not store this in another useState because it can be calculated
+   * from existing state: tasks + selectedFilter.
    */
+  const filteredTasks = tasks.filter((task) => {
+    if (selectedFilter === "active") {
+      return !task.isCompleted;
+    }
+
+    if (selectedFilter === "completed") {
+      return task.isCompleted;
+    }
+
+    return true;
+  });
+
   function handleAddTask(newTask: Task) {
     setTasks((currentTasks) => [newTask, ...currentTasks]);
   }
@@ -43,12 +57,29 @@ export function DashboardPage() {
     );
   }
 
+  /**
+   * This helper keeps the JSX cleaner.
+   *
+   * It returns a different empty message depending on the selected filter.
+   */
+  function getEmptyMessage() {
+    if (selectedFilter === "active") {
+      return "No active tasks right now. Try adding a new task or marking a completed task as active.";
+    }
+
+    if (selectedFilter === "completed") {
+      return "No completed tasks yet. Complete a task to see it here.";
+    }
+
+    return "No tasks yet. Add your first task using the form above.";
+  }
+
   const dashboardCards = [
     {
       id: "concepts",
       title: "Concepts",
-      value: "12",
-      description: "React concepts practised across the first three modules.",
+      value: "15",
+      description: "React concepts practised across the first four modules.",
     },
     {
       id: "active-tasks",
@@ -67,11 +98,11 @@ export function DashboardPage() {
   return (
     <section className="dashboard-page">
       <div className="page-intro">
-        <p className="eyebrow">Module 3</p>
-        <h2>Forms & Controlled Components</h2>
+        <p className="eyebrow">Module 4</p>
+        <h2>Filtering & Conditional Rendering</h2>
         <p>
-          This step adds a form. The input values are controlled by React state,
-          and submitting the form adds a new task to the dashboard.
+          This step adds filter state so we can show all, active, or completed
+          tasks without changing the original task list.
         </p>
       </div>
 
@@ -89,22 +120,33 @@ export function DashboardPage() {
       <TaskForm onAddTask={handleAddTask} />
 
       <section className="tasks-section">
-        <div className="section-heading">
+        <div className="section-heading task-section-header">
           <div>
             <p className="eyebrow">Practice</p>
             <h2>Module Tasks</h2>
+            <p className="section-description">
+              Filter your tasks by current progress.
+            </p>
           </div>
 
-          <p>
-            {completedTasksCount} of {tasks.length} completed
-          </p>
+          <TaskFilterControls
+            selectedFilter={selectedFilter}
+            onFilterChange={setSelectedFilter}
+          />
         </div>
 
-        <TaskList
-          tasks={tasks}
-          onToggleTask={handleToggleTask}
-          onDeleteTask={handleDeleteTask}
-        />
+        {filteredTasks.length > 0 ? (
+          <TaskList
+            tasks={filteredTasks}
+            onToggleTask={handleToggleTask}
+            onDeleteTask={handleDeleteTask}
+          />
+        ) : (
+          <div className="empty-state">
+            <h3>No matching tasks</h3>
+            <p>{getEmptyMessage()}</p>
+          </div>
+        )}
       </section>
     </section>
   );

@@ -411,3 +411,50 @@ select {
     width: 100%;
   }
 }
+
+.task-section-header {
+  align-items: flex-start;
+}
+
+.section-description {
+  margin: 6px 0 0;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.task-filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.task-filter-button {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: #ffffff;
+  color: #374151;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.task-filter-button:hover {
+  background: #f9fafb;
+}
+
+.task-filter-button.active {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+@media (max-width: 760px) {
+  .task-filter-controls {
+    width: 100%;
+  }
+
+  .task-filter-button {
+    flex: 1;
+  }
+}

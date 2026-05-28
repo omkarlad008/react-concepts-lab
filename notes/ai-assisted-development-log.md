@@ -123,3 +123,43 @@ AI helped explain the React state update pattern, but I manually implemented and
 
 ### AI usage reflection
 AI helped structure the form module and explain controlled components, but I manually implemented and tested the form behaviour. I checked that validation, task creation, form reset, and existing task actions worked before documenting and committing the step.
+
+---
+
+## Step 4 — Filtering & Conditional Rendering
+
+### What I used AI for
+- Planning the filtering and conditional rendering module.
+- Understanding how to create a `TaskFilter` union type.
+- Learning how to derive a filtered task list from existing state.
+- Structuring the filter controls as a reusable component.
+- Creating interview-style notes for filtering and conditional rendering.
+
+### What I implemented myself
+- Added the `TaskFilter` type.
+- Created the `TaskFilterControls` component.
+- Added `selectedFilter` state to `DashboardPage`.
+- Created the derived `filteredTasks` array.
+- Added conditional rendering for empty filter results.
+- Added dynamic CSS styling for the selected filter button.
+- Tested all, active, and completed filters manually.
+
+### What I learned
+- Filter state controls which data is visible.
+- Union types make fixed UI options safer in TypeScript.
+- Filtered lists should usually be derived from source state.
+- The original task list should remain unchanged when filtering.
+- Conditional rendering helps show different UI for different states.
+- Dynamic CSS classes can visually reflect selected state.
+- Parent components should own state that affects multiple child components.
+
+### What I should be able to explain in an interview
+- How to implement filtering in React.
+- Why filtered data should be derived from original state.
+- How TypeScript union types improve safety.
+- How conditional rendering works.
+- How dynamic classes are applied in JSX.
+- Why the original data should not be overwritten during filtering.
+
+### AI usage reflection
+AI helped structure the filtering module and explain the difference between source state and derived filtered data. I manually implemented and tested the filter behaviour before documenting and committing the step.
