@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Task } from "../../types/task";
 
 type TaskItemProps = {
@@ -9,8 +10,7 @@ type TaskItemProps = {
 /**
  * TaskItem displays one task.
  *
- * It receives the task data through props.
- * It also receives event handler functions from the parent component.
+ * In Step 6, each task also links to a dynamic detail page.
  */
 export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
   return (
@@ -35,6 +35,10 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
       </div>
 
       <div className="task-actions">
+        <Link className="secondary-button link-button" to={`/tasks/${task.id}`}>
+          View details
+        </Link>
+
         <button
           type="button"
           className="secondary-button"

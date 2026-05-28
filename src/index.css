@@ -549,3 +549,60 @@ select {
     grid-template-columns: 1fr;
   }
 }
+
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.task-detail-card {
+  display: grid;
+  gap: 22px;
+  padding: 26px;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.task-detail-section {
+  display: grid;
+  gap: 8px;
+}
+
+.task-detail-section h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 18px;
+}
+
+.task-detail-section p {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.task-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.compact-link {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .task-detail-actions {
+    flex-direction: column;
+  }
+
+  .task-detail-actions .secondary-button,
+  .task-detail-actions .danger-button,
+  .task-detail-actions .primary-link {
+    width: 100%;
+    text-align: center;
+  }
+}

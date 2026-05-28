@@ -3,27 +3,36 @@ import { DashboardCard } from "../components/dashboard/DashboardCard";
 import { TaskFilterControls } from "../components/tasks/TaskFilterControls";
 import { TaskForm } from "../components/tasks/TaskForm";
 import { TaskList } from "../components/tasks/TaskList";
-import { initialTasks } from "../data/initialTasks";
 import type { Task, TaskFilter } from "../types/task";
 
+type DashboardPageProps = {
+  tasks: Task[];
+  onAddTask: (task: Task) => void;
+  onToggleTask: (taskId: string) => void;
+  onDeleteTask: (taskId: string) => void;
+};
+
 /**
- * DashboardPage owns the main task state.
+ * DashboardPage displays the task dashboard.
  *
- * In Step 4, we add selectedFilter state to control which tasks
- * are visible without changing the original tasks array.
+ * The main tasks state now lives in App.tsx.
+ * DashboardPage receives tasks and task update functions through props.
  */
-export function DashboardPage() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+export function DashboardPage({
+  tasks,
+  onAddTask,
+  onToggleTask,
+  onDeleteTask,
+}: DashboardPageProps) {
   const [selectedFilter, setSelectedFilter] = useState<TaskFilter>("all");
 
   const completedTasksCount = tasks.filter((task) => task.isCompleted).length;
   const activeTasksCount = tasks.length - completedTasksCount;
 
   /**
-   * filteredTasks is a derived array.
+   * filteredTasks is derived from tasks + selectedFilter.
    *
-   * We do not store this in another useState because it can be calculated
-   * from existing state: tasks + selectedFilter.
+   * We keep the original task list unchanged.
    */
   const filteredTasks = tasks.filter((task) => {
     if (selectedFilter === "active") {
@@ -37,31 +46,6 @@ export function DashboardPage() {
     return true;
   });
 
-  function handleAddTask(newTask: Task) {
-    setTasks((currentTasks) => [newTask, ...currentTasks]);
-  }
-
-  function handleToggleTask(taskId: string) {
-    setTasks((currentTasks) =>
-      currentTasks.map((task) =>
-        task.id === taskId
-          ? { ...task, isCompleted: !task.isCompleted }
-          : task,
-      ),
-    );
-  }
-
-  function handleDeleteTask(taskId: string) {
-    setTasks((currentTasks) =>
-      currentTasks.filter((task) => task.id !== taskId),
-    );
-  }
-
-  /**
-   * This helper keeps the JSX cleaner.
-   *
-   * It returns a different empty message depending on the selected filter.
-   */
   function getEmptyMessage() {
     if (selectedFilter === "active") {
       return "No active tasks right now. Try adding a new task or marking a completed task as active.";
@@ -78,8 +62,8 @@ export function DashboardPage() {
     {
       id: "concepts",
       title: "Concepts",
-      value: "15",
-      description: "React concepts practised across the first four modules.",
+      value: "18",
+      description: "React concepts practised across the first six modules.",
     },
     {
       id: "active-tasks",
@@ -98,11 +82,11 @@ export function DashboardPage() {
   return (
     <section className="dashboard-page">
       <div className="page-intro">
-        <p className="eyebrow">Module 4</p>
-        <h2>Filtering & Conditional Rendering</h2>
+        <p className="eyebrow">Module 6</p>
+        <h2>URL Params & Task Detail Pages</h2>
         <p>
-          This step adds filter state so we can show all, active, or completed
-          tasks without changing the original task list.
+          This step connects tasks to detail pages using dynamic routes like
+          /tasks/:taskId.
         </p>
       </div>
 
@@ -117,7 +101,7 @@ export function DashboardPage() {
         ))}
       </div>
 
-      <TaskForm onAddTask={handleAddTask} />
+      <TaskForm onAddTask={onAddTask} />
 
       <section className="tasks-section">
         <div className="section-heading task-section-header">
@@ -125,7 +109,7 @@ export function DashboardPage() {
             <p className="eyebrow">Practice</p>
             <h2>Module Tasks</h2>
             <p className="section-description">
-              Filter your tasks by current progress.
+              Open a task to view its route-based detail page.
             </p>
           </div>
 
@@ -138,8 +122,8 @@ export function DashboardPage() {
         {filteredTasks.length > 0 ? (
           <TaskList
             tasks={filteredTasks}
-            onToggleTask={handleToggleTask}
-            onDeleteTask={handleDeleteTask}
+            onToggleTask={onToggleTask}
+            onDeleteTask={onDeleteTask}
           />
         ) : (
           <div className="empty-state">

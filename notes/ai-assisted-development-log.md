@@ -163,3 +163,87 @@ AI helped structure the form module and explain controlled components, but I man
 
 ### AI usage reflection
 AI helped structure the filtering module and explain the difference between source state and derived filtered data. I manually implemented and tested the filter behaviour before documenting and committing the step.
+
+---
+
+## Step 5 — React Router & Multiple Pages
+
+### What I used AI for
+- Planning the routing module.
+- Understanding how `BrowserRouter`, `Routes`, and `Route` work.
+- Creating multiple page components.
+- Learning how `NavLink` highlights the active route.
+- Creating interview-style notes for React Router.
+
+### What I implemented myself
+- Installed or verified `react-router-dom`.
+- Wrapped the app with `BrowserRouter`.
+- Added route definitions in `App.tsx`.
+- Created `ConceptsPage`, `NotesPage`, `SettingsPage`, and `NotFoundPage`.
+- Updated `AppHeader` to use `NavLink`.
+- Tested navigation between pages.
+- Tested the fallback 404 route.
+
+### What I learned
+- React Router allows client-side navigation in React apps.
+- `BrowserRouter` enables routing through browser URLs.
+- `Routes` contains all route definitions.
+- `Route` maps a path to a page component.
+- `NavLink` is useful for navigation menus because it can detect the active route.
+- The `end` prop helps the root `/` link match exactly.
+- `path="*"` can be used for a Not Found page.
+
+### What I should be able to explain in an interview
+- What React Router is.
+- How client-side routing works.
+- How to define routes in React Router.
+- How to create navigation links.
+- How to highlight active navigation links.
+- How to create a 404 fallback route.
+- Why internal routing should use `Link` or `NavLink` instead of normal anchor tags.
+
+### AI usage reflection
+AI helped structure the routing step and explain routing concepts. I manually implemented the pages and tested navigation, route refresh behaviour, active links, and the Not Found route before documenting and committing the work.
+
+---
+
+## Step 6 — URL Params & Task Detail Page
+
+### What I used AI for
+- Planning the dynamic route module.
+- Understanding how `/tasks/:taskId` works.
+- Learning how to read URL parameters using `useParams`.
+- Understanding when to use `Link` and when to use `useNavigate`.
+- Understanding why task state needed to move from `DashboardPage` into `App`.
+- Creating interview-style notes for URL params and dynamic routes.
+
+### What I implemented myself
+- Added the `/tasks/:taskId` route.
+- Created the `TaskDetailPage` component.
+- Updated `TaskItem` to include a `View details` link.
+- Moved the main task state from `DashboardPage` into `App`.
+- Passed task data and task handlers into routed pages through props.
+- Tested valid task detail pages.
+- Tested invalid task IDs.
+- Tested toggle and delete actions from the detail page.
+
+### What I learned
+- Dynamic routes allow one page component to handle many item detail pages.
+- `useParams` reads values from the current URL.
+- `Link` is used for normal internal navigation.
+- `useNavigate` is useful for navigation after an action.
+- `.find()` can locate a task by ID.
+- Invalid URL params should be handled safely.
+- Shared state should live above routed pages that need the same data.
+
+### What I should be able to explain in an interview
+- What URL params are.
+- How to create a dynamic route.
+- How to use `useParams`.
+- How to build a route-based detail page.
+- How to handle missing or invalid route data.
+- Why state was lifted from `DashboardPage` into `App`.
+- The difference between `Link`, `NavLink`, and `useNavigate`.
+
+### AI usage reflection
+AI helped structure the dynamic routing module and explain state lifting across routed pages. I manually implemented and tested task detail navigation, invalid task handling, toggle behaviour, delete behaviour, and return navigation before documenting and committing the step.

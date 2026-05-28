@@ -55,8 +55,15 @@ The goal of this project is to learn React deeply by implementing one concept at
 - `Routes`
 - `Route`
 - `NavLink`
+- `Link`
 - Client-side routing
 - 404 route
+-
+- `useParams`
+- `useNavigate`
+- Dynamic routes
+- URL params
+- Route-based detail pages
 
 
 More concepts will be added step by step.
@@ -80,6 +87,7 @@ http://localhost:5173
 - `/concepts` — React concepts covered
 - `/notes` — Learning notes overview
 - `/settings` — Future settings page
+- `/tasks/:taskId` — Dynamic task detail page
 - `*` — Not Found page
 
 ## Learning Workflow
