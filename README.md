@@ -11,6 +11,7 @@ The goal of this project is to learn React deeply by implementing one concept at
 - React
 - TypeScript
 - Vite
+- React Router
 - CSS
 - Git and GitHub
 
@@ -48,6 +49,15 @@ The goal of this project is to learn React deeply by implementing one concept at
 - Derived filtered lists
 - Dynamic CSS classes
 - Empty state rendering
+-
+- React Router
+- `BrowserRouter`
+- `Routes`
+- `Route`
+- `NavLink`
+- Client-side routing
+- 404 route
+
 
 More concepts will be added step by step.
 
@@ -63,6 +73,14 @@ Then open:
 ```txt
 http://localhost:5173
 ```
+
+## Available Routes
+
+- `/` — Dashboard
+- `/concepts` — React concepts covered
+- `/notes` — Learning notes overview
+- `/settings` — Future settings page
+- `*` — Not Found page
 
 ## Learning Workflow
 
