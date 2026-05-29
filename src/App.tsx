@@ -7,28 +7,23 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import { NotesPage } from "./pages/NotesPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { TaskDetailPage } from "./pages/TaskDetailPage";
+import { ApiPracticePage } from "./pages/ApiPracticePage";
 import { initialTasks } from "./data/initialTasks";
 import type { Task } from "./types/task";
 
 /**
  * App is the root component of our React application.
  *
- * In Step 6, App owns the main tasks state because both
- * DashboardPage and TaskDetailPage need access to the same task data.
+ * App owns the main tasks state because both DashboardPage
+ * and TaskDetailPage need access to the same task data.
  */
 function App() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
-  /**
-   * Adds a new task to the beginning of the task list.
-   */
   function handleAddTask(newTask: Task) {
     setTasks((currentTasks) => [newTask, ...currentTasks]);
   }
 
-  /**
-   * Toggles a task between active and completed.
-   */
   function handleToggleTask(taskId: string) {
     setTasks((currentTasks) =>
       currentTasks.map((task) =>
@@ -39,9 +34,6 @@ function App() {
     );
   }
 
-  /**
-   * Deletes a task from the main task list.
-   */
   function handleDeleteTask(taskId: string) {
     setTasks((currentTasks) =>
       currentTasks.filter((task) => task.id !== taskId),
@@ -67,6 +59,7 @@ function App() {
           <Route path="/concepts" element={<ConceptsPage />} />
           <Route path="/notes" element={<NotesPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/api-practice" element={<ApiPracticePage />} />
 
           <Route
             path="/tasks/:taskId"

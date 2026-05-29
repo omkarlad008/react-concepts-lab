@@ -3,8 +3,7 @@ import { NavLink } from "react-router-dom";
 /**
  * AppHeader displays the top section of the application.
  *
- * In Step 5, we add navigation links using NavLink.
- * NavLink helps us style the currently active page.
+ * Navigation uses NavLink so the active page can be styled.
  */
 export function AppHeader() {
   return (
@@ -41,6 +40,15 @@ export function AppHeader() {
           }
         >
           Notes
+        </NavLink>
+
+        <NavLink
+          to="/api-practice"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
+          API Practice
         </NavLink>
 
         <NavLink

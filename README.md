@@ -13,6 +13,7 @@ The goal of this project is to learn React deeply by implementing one concept at
 - Vite
 - React Router
 - CSS
+- Fetch API
 - Git and GitHub
 
 ## Concepts Covered
@@ -64,6 +65,17 @@ The goal of this project is to learn React deeply by implementing one concept at
 - Dynamic routes
 - URL params
 - Route-based detail pages
+- 
+- `useEffect`
+- Side effects
+- Fetch API
+- Loading state
+- Error state
+- Success state
+- Empty API state
+- Effect cleanup
+- `AbortController`
+- Retry/reload pattern
 
 
 More concepts will be added step by step.
@@ -86,6 +98,7 @@ http://localhost:5173
 - `/` — Dashboard
 - `/concepts` — React concepts covered
 - `/notes` — Learning notes overview
+- `/api-practice` — API calls and loading/error state practice
 - `/settings` — Future settings page
 - `/tasks/:taskId` — Dynamic task detail page
 - `*` — Not Found page

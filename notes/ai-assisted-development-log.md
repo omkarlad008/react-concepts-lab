@@ -247,3 +247,49 @@ AI helped structure the routing step and explain routing concepts. I manually im
 
 ### AI usage reflection
 AI helped structure the dynamic routing module and explain state lifting across routed pages. I manually implemented and tested task detail navigation, invalid task handling, toggle behaviour, delete behaviour, and return navigation before documenting and committing the step.
+
+---
+
+## Step 7 — useEffect, API Calls, Loading & Error States
+
+### What I used AI for
+- Planning the API practice module.
+- Understanding how `useEffect` runs after render.
+- Learning how to fetch API data in React.
+- Understanding loading, error, success, and empty UI states.
+- Learning how `AbortController` can clean up fetch requests.
+- Creating interview-style notes for API calls and effects.
+
+### What I implemented myself
+- Created the `ApiUser` type.
+- Created the `ApiPracticePage` component.
+- Added API route `/api-practice`.
+- Added navigation link for API Practice.
+- Used `useEffect` to fetch user data.
+- Added loading, error, empty, and success states.
+- Added a reload button.
+- Tested the success state using JSONPlaceholder.
+- Temporarily tested the error state using a broken API URL.
+- Verified that other routes still work.
+
+### What I learned
+- `useEffect` is used for side effects such as API calls.
+- API calls should handle loading, error, empty, and success states.
+- The dependency array controls when the effect runs.
+- Changing `reloadKey` can re-trigger the effect.
+- `AbortController` can cancel fetch requests during cleanup.
+- UI should provide recovery actions such as retry or reload.
+- Side effects should not be placed directly in the component body.
+
+### What I should be able to explain in an interview
+- What `useEffect` is.
+- What side effects are.
+- How to fetch data in React.
+- How to handle loading and error states.
+- How to create a retry or reload button.
+- What the dependency array does.
+- What effect cleanup is.
+- Why `AbortController` can be useful.
+
+### AI usage reflection
+AI helped structure the API practice module and explain side effects, dependency arrays, and request cleanup. I manually implemented the API page, tested loading/success/error states, and confirmed existing routes still worked before documenting and committing the step.
