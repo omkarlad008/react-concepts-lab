@@ -16,6 +16,13 @@ export function ConceptsPage() {
     "Filtering",
     "Conditional rendering",
     "React Router",
+    "URL params",
+    "API calls",
+    "useEffect",
+    "Context API",
+    "Provider",
+    "useContext",
+    "Global UI state",
   ];
 
   return (

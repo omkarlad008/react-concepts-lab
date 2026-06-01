@@ -76,6 +76,16 @@ The goal of this project is to learn React deeply by implementing one concept at
 - Effect cleanup
 - `AbortController`
 - Retry/reload pattern
+-
+- Context API
+- `createContext`
+- Provider
+- `useContext`
+- Custom Context hook
+- Global UI state
+- Prop drilling
+- Theme state
+- CSS variables
 
 
 More concepts will be added step by step.
@@ -99,7 +109,7 @@ http://localhost:5173
 - `/concepts` — React concepts covered
 - `/notes` — Learning notes overview
 - `/api-practice` — API calls and loading/error state practice
-- `/settings` — Future settings page
+- `/settings` — Context API and theme settings
 - `/tasks/:taskId` — Dynamic task detail page
 - `*` — Not Found page
 

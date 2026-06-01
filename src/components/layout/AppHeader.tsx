@@ -1,16 +1,21 @@
 import { NavLink } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
 
 /**
  * AppHeader displays the top section of the application.
  *
- * Navigation uses NavLink so the active page can be styled.
+ * In Step 8, it reads the current theme from Context.
+ * This shows how a component can access global state without props.
  */
 export function AppHeader() {
+  const { theme } = useTheme();
+
   return (
     <header className="app-header">
       <div>
         <p className="eyebrow">React Concepts Lab</p>
         <h1>Task & Learning Dashboard</h1>
+        <p className="theme-badge">Current theme: {theme}</p>
       </div>
 
       <nav className="app-nav" aria-label="Main navigation">

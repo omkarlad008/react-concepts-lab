@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppShell } from "./components/layout/AppShell";
+import { ThemeProvider } from "./context/ThemeContext";
 import { ConceptsPage } from "./pages/ConceptsPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -14,8 +15,8 @@ import type { Task } from "./types/task";
 /**
  * App is the root component of our React application.
  *
- * App owns the main tasks state because both DashboardPage
- * and TaskDetailPage need access to the same task data.
+ * App owns task state.
+ * ThemeProvider owns global theme state.
  */
 function App() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
@@ -41,41 +42,43 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <AppShell>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <DashboardPage
-                tasks={tasks}
-                onAddTask={handleAddTask}
-                onToggleTask={handleToggleTask}
-                onDeleteTask={handleDeleteTask}
-              />
-            }
-          />
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppShell>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <DashboardPage
+                  tasks={tasks}
+                  onAddTask={handleAddTask}
+                  onToggleTask={handleToggleTask}
+                  onDeleteTask={handleDeleteTask}
+                />
+              }
+            />
 
-          <Route path="/concepts" element={<ConceptsPage />} />
-          <Route path="/notes" element={<NotesPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/api-practice" element={<ApiPracticePage />} />
+            <Route path="/concepts" element={<ConceptsPage />} />
+            <Route path="/notes" element={<NotesPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/api-practice" element={<ApiPracticePage />} />
 
-          <Route
-            path="/tasks/:taskId"
-            element={
-              <TaskDetailPage
-                tasks={tasks}
-                onToggleTask={handleToggleTask}
-                onDeleteTask={handleDeleteTask}
-              />
-            }
-          />
+            <Route
+              path="/tasks/:taskId"
+              element={
+                <TaskDetailPage
+                  tasks={tasks}
+                  onToggleTask={handleToggleTask}
+                  onDeleteTask={handleDeleteTask}
+                />
+              }
+            />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </AppShell>
-    </BrowserRouter>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </AppShell>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

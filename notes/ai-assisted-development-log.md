@@ -293,3 +293,46 @@ AI helped structure the dynamic routing module and explain state lifting across 
 
 ### AI usage reflection
 AI helped structure the API practice module and explain side effects, dependency arrays, and request cleanup. I manually implemented the API page, tested loading/success/error states, and confirmed existing routes still worked before documenting and committing the step.
+
+---
+
+## Step 8 — Context API & Theme Settings
+
+### What I used AI for
+- Planning the Context API module.
+- Understanding how `createContext`, Provider, and `useContext` work.
+- Learning why theme is suitable global UI state.
+- Understanding how to avoid prop drilling.
+- Creating interview-style notes for Context API and theme state.
+
+### What I implemented myself
+- Created the `ThemeContext`.
+- Created the `ThemeProvider`.
+- Created the custom `useTheme` hook.
+- Wrapped the app with `ThemeProvider`.
+- Updated `SettingsPage` to change the global theme.
+- Updated `AppHeader` to read the current theme.
+- Added CSS variables for light and dark themes.
+- Tested theme switching across multiple pages.
+
+### What I learned
+- Context can share data across many components without prop drilling.
+- Provider supplies Context values to child components.
+- `useContext` reads the nearest Context value.
+- A custom Context hook makes Context safer and cleaner to use.
+- Theme is a good example of global UI state.
+- CSS variables make theme switching easier.
+- React state can update a DOM attribute that CSS uses for styling.
+
+### What I should be able to explain in an interview
+- What Context API is.
+- What problem Context solves.
+- What prop drilling means.
+- How Provider and `useContext` work.
+- Why we created a custom `useTheme` hook.
+- When Context is useful.
+- When Context should not be used.
+- How theme switching works using React state and CSS variables.
+
+### AI usage reflection
+AI helped structure the Context API module and explain global UI state. I manually implemented the provider, custom hook, settings controls, header badge, and CSS theme variables, then tested theme changes across the app before documenting and committing the step.
