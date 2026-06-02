@@ -103,6 +103,14 @@ The goal of this project is to learn React deeply by implementing one concept at
 - `JSON.parse`
 - Persistent state
 - Effect-based persistence
+-
+- `useMemo`
+- `useCallback`
+- `React.memo`
+- Referential equality
+- Stable function references
+- Unnecessary re-renders
+- Memoised derived values
 
 More concepts will be added step by step.
 

@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useCallback, useEffect, useMemo, useReducer } from "react";
 import { initialTasks } from "../data/initialTasks";
 import { tasksReducer } from "../reducers/tasksReducer";
 import type { Task } from "../types/task";
@@ -34,11 +34,15 @@ function loadInitialTasks(): Task[] {
 /**
  * useTasks manages task state with useReducer and localStorage.
  *
- * This custom hook keeps App.tsx cleaner by hiding task reducer
- * and persistence logic in one reusable place.
+ * In Step 11, task action handlers are wrapped with useCallback.
+ * This gives child components stable function references between renders.
  */
 export function useTasks() {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks, loadInitialTasks);
+  const [tasks, dispatch] = useReducer(
+    tasksReducer,
+    initialTasks,
+    loadInitialTasks,
+  );
 
   /**
    * Save tasks whenever they change.
@@ -47,48 +51,62 @@ export function useTasks() {
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
   }, [tasks]);
 
-  function addTask(newTask: Task) {
+  const addTask = useCallback((newTask: Task) => {
     dispatch({
       type: "add_task",
       payload: newTask,
     });
-  }
+  }, []);
 
-  function toggleTask(taskId: string) {
+  const toggleTask = useCallback((taskId: string) => {
     dispatch({
       type: "toggle_task",
       payload: {
         taskId,
       },
     });
-  }
+  }, []);
 
-  function deleteTask(taskId: string) {
+  const deleteTask = useCallback((taskId: string) => {
     dispatch({
       type: "delete_task",
       payload: {
         taskId,
       },
     });
-  }
+  }, []);
 
-  function clearCompletedTasks() {
+  const clearCompletedTasks = useCallback(() => {
     dispatch({
       type: "clear_completed",
     });
-  }
+  }, []);
 
-  function resetTasks() {
+  const resetTasks = useCallback(() => {
     localStorage.removeItem(TASKS_STORAGE_KEY);
     window.location.reload();
-  }
+  }, []);
 
-  return {
-    tasks,
-    addTask,
-    toggleTask,
-    deleteTask,
-    clearCompletedTasks,
-    resetTasks,
-  };
+  /**
+   * Memoise the returned object so consumers receive a stable object
+   * unless tasks or one of the handlers changes.
+   */
+  return useMemo(
+    () => ({
+      tasks,
+      addTask,
+      toggleTask,
+      deleteTask,
+      clearCompletedTasks,
+      resetTasks,
+    }),
+    [
+      tasks,
+      addTask,
+      toggleTask,
+      deleteTask,
+      clearCompletedTasks,
+      resetTasks,
+    ],
+  );
 }

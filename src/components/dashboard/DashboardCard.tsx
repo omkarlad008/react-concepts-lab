@@ -1,28 +1,18 @@
+import { memo } from "react";
+
 type DashboardCardProps = {
-  /**
-   * Main heading shown on the card.
-   */
   title: string;
-
-  /**
-   * Main value shown on the card.
-   * We keep it as string so it can support values like "3", "80%", or "Soon".
-   */
   value: string;
-
-  /**
-   * Short explanation shown below the value.
-   */
   description: string;
 };
 
 /**
- * DashboardCard is a reusable component.
+ * DashboardCard displays one summary card.
  *
- * Instead of creating three different cards manually,
- * we pass different props to the same component.
+ * React.memo prevents this component from re-rendering when its props
+ * have not changed.
  */
-export function DashboardCard({
+export const DashboardCard = memo(function DashboardCard({
   title,
   value,
   description,
@@ -34,4 +24,4 @@ export function DashboardCard({
       <p>{description}</p>
     </article>
   );
-}
+});

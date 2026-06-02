@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import type { Task } from "../../types/task";
 
@@ -10,9 +11,13 @@ type TaskItemProps = {
 /**
  * TaskItem displays one task.
  *
- * In Step 6, each task also links to a dynamic detail page.
+ * React.memo prevents unchanged task items from re-rendering when possible.
  */
-export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
+export const TaskItem = memo(function TaskItem({
+  task,
+  onToggle,
+  onDelete,
+}: TaskItemProps) {
   return (
     <article className="task-item">
       <div className="task-item-content">
@@ -57,4 +62,4 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
       </div>
     </article>
   );
-}
+});

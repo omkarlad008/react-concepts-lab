@@ -422,3 +422,48 @@ AI helped structure the reducer refactor and explain reducer-based state managem
 
 ### AI usage reflection
 AI helped structure the persistence module and explain custom hooks, lazy initial state, and localStorage syncing. I manually implemented the hooks, connected them to tasks and theme, and tested refresh persistence before documenting and committing the step.
+
+---
+
+## Step 11 — Performance Optimisation
+
+### What I used AI for
+- Planning the performance optimisation module.
+- Understanding when to use `useMemo`, `useCallback`, and `React.memo`.
+- Learning how referential equality affects React rendering.
+- Understanding why optimisation should not be applied blindly.
+- Creating interview-style notes for React performance concepts.
+
+### What I implemented myself
+- Added `useMemo` for task stats.
+- Added `useMemo` for filtered task lists.
+- Added `useMemo` for dashboard card data.
+- Added `useMemo` for empty messages.
+- Added `useCallback` for task action handlers in `useTasks`.
+- Memoised the returned object from `useTasks`.
+- Wrapped `DashboardCard` with `React.memo`.
+- Wrapped `TaskList` with `React.memo`.
+- Wrapped `TaskItem` with `React.memo`.
+- Tested dashboard, task detail, API, theme, and persistence behaviour after optimisation.
+
+### What I learned
+- `useMemo` memoises calculated values.
+- `useCallback` memoises function references.
+- `React.memo` can skip child re-renders when props are unchanged.
+- Objects, arrays, and functions are compared by reference.
+- Stable function references matter when passing callbacks to memoised children.
+- Memoisation is useful for derived values, large lists, and expensive calculations.
+- Optimisation should be used thoughtfully, not everywhere by default.
+
+### What I should be able to explain in an interview
+- What `useMemo` does.
+- What `useCallback` does.
+- What `React.memo` does.
+- What referential equality means.
+- Why unnecessary re-renders can happen.
+- When memoisation is useful.
+- When memoisation is unnecessary.
+- How this project optimised task filtering and task components.
+
+### AI usage reflection
+AI helped structure the performance optimisation step and explain memoisation concepts. I manually applied `useMemo`, `useCallback`, and `React.memo`, then tested all existing project features to confirm the optimisation did not break functionality.

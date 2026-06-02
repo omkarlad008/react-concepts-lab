@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { Task } from "../../types/task";
 import { TaskItem } from "./TaskItem";
 
@@ -8,24 +9,15 @@ type TaskListProps = {
 };
 
 /**
- * TaskList renders a list of TaskItem components.
+ * TaskList displays the list of tasks.
  *
- * It also handles the empty state when there are no tasks left.
+ * React.memo helps avoid re-rendering the list when the props are unchanged.
  */
-export function TaskList({
+export const TaskList = memo(function TaskList({
   tasks,
   onToggleTask,
   onDeleteTask,
 }: TaskListProps) {
-  if (tasks.length === 0) {
-    return (
-      <div className="empty-state">
-        <h3>No tasks left</h3>
-        <p>You deleted all tasks. We will add a task form in a later step.</p>
-      </div>
-    );
-  }
-
   return (
     <div className="task-list">
       {tasks.map((task) => (
@@ -38,4 +30,4 @@ export function TaskList({
       ))}
     </div>
   );
-}
+});

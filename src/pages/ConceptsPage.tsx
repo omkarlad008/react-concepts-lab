@@ -32,6 +32,10 @@ export function ConceptsPage() {
     "localStorage",
     "Persistent state",
     "Lazy initial state",
+    "useMemo",
+    "useCallback",
+    "React.memo",
+    "Referential equality",
   ];
 
   return (

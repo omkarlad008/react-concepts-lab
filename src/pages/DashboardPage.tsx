@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { DashboardCard } from "../components/dashboard/DashboardCard";
 import { TaskFilterControls } from "../components/tasks/TaskFilterControls";
 import { TaskForm } from "../components/tasks/TaskForm";
@@ -17,7 +17,9 @@ type DashboardPageProps = {
 /**
  * DashboardPage displays the task dashboard.
  *
- * Task state is now persisted through the useTasks custom hook in App.tsx.
+ * In Step 11, expensive or repeated derived values are wrapped in useMemo.
+ * This is useful when derived values depend on state and do not need to be
+ * recalculated on every unrelated render.
  */
 export function DashboardPage({
   tasks,
@@ -29,24 +31,42 @@ export function DashboardPage({
 }: DashboardPageProps) {
   const [selectedFilter, setSelectedFilter] = useState<TaskFilter>("all");
 
-  const completedTasksCount = tasks.filter((task) => task.isCompleted).length;
-  const activeTasksCount = tasks.length - completedTasksCount;
+  /**
+   * taskStats is derived from tasks.
+   *
+   * useMemo ensures this calculation only re-runs when tasks changes.
+   */
+  const taskStats = useMemo(() => {
+    const completedTasksCount = tasks.filter((task) => task.isCompleted).length;
+    const activeTasksCount = tasks.length - completedTasksCount;
 
-  const hasCompletedTasks = completedTasksCount > 0;
+    return {
+      completedTasksCount,
+      activeTasksCount,
+      hasCompletedTasks: completedTasksCount > 0,
+    };
+  }, [tasks]);
 
-  const filteredTasks = tasks.filter((task) => {
-    if (selectedFilter === "active") {
-      return !task.isCompleted;
-    }
+  /**
+   * filteredTasks is also derived from tasks and selectedFilter.
+   *
+   * It only recalculates when tasks or selectedFilter changes.
+   */
+  const filteredTasks = useMemo(() => {
+    return tasks.filter((task) => {
+      if (selectedFilter === "active") {
+        return !task.isCompleted;
+      }
 
-    if (selectedFilter === "completed") {
-      return task.isCompleted;
-    }
+      if (selectedFilter === "completed") {
+        return task.isCompleted;
+      }
 
-    return true;
-  });
+      return true;
+    });
+  }, [tasks, selectedFilter]);
 
-  function getEmptyMessage() {
+  const emptyMessage = useMemo(() => {
     if (selectedFilter === "active") {
       return "No active tasks right now. Try adding a new task or marking a completed task as active.";
     }
@@ -56,37 +76,40 @@ export function DashboardPage({
     }
 
     return "No tasks yet. Add your first task using the form above.";
-  }
+  }, [selectedFilter]);
 
-  const dashboardCards = [
-    {
-      id: "concepts",
-      title: "Concepts",
-      value: "24",
-      description: "React concepts practised across the first ten modules.",
-    },
-    {
-      id: "active-tasks",
-      title: "Active Tasks",
-      value: String(activeTasksCount),
-      description: "Tasks still remaining in the learning dashboard.",
-    },
-    {
-      id: "completed-tasks",
-      title: "Completed",
-      value: String(completedTasksCount),
-      description: "Tasks saved locally after completion.",
-    },
-  ];
+  const dashboardCards = useMemo(
+    () => [
+      {
+        id: "concepts",
+        title: "Concepts",
+        value: "27",
+        description: "React concepts practised across the first eleven modules.",
+      },
+      {
+        id: "active-tasks",
+        title: "Active Tasks",
+        value: String(taskStats.activeTasksCount),
+        description: "Tasks still remaining in the learning dashboard.",
+      },
+      {
+        id: "completed-tasks",
+        title: "Completed",
+        value: String(taskStats.completedTasksCount),
+        description: "Tasks saved locally after completion.",
+      },
+    ],
+    [taskStats.activeTasksCount, taskStats.completedTasksCount],
+  );
 
   return (
     <section className="dashboard-page">
       <div className="page-intro">
-        <p className="eyebrow">Module 10</p>
-        <h2>Custom Hooks & LocalStorage</h2>
+        <p className="eyebrow">Module 11</p>
+        <h2>Performance Optimisation</h2>
         <p>
-          This step persists tasks and theme settings in the browser using
-          custom hooks and localStorage.
+          This step uses memoisation to avoid unnecessary recalculations and
+          reduce unnecessary child component renders.
         </p>
       </div>
 
@@ -109,7 +132,7 @@ export function DashboardPage({
             <p className="eyebrow">Practice</p>
             <h2>Module Tasks</h2>
             <p className="section-description">
-              Tasks now stay saved after refreshing the browser.
+              Derived task data is now memoised with <code>useMemo</code>.
             </p>
           </div>
 
@@ -123,7 +146,7 @@ export function DashboardPage({
               type="button"
               className="secondary-button"
               onClick={onClearCompletedTasks}
-              disabled={!hasCompletedTasks}
+              disabled={!taskStats.hasCompletedTasks}
             >
               Clear completed
             </button>
@@ -147,7 +170,7 @@ export function DashboardPage({
         ) : (
           <div className="empty-state">
             <h3>No matching tasks</h3>
-            <p>{getEmptyMessage()}</p>
+            <p>{emptyMessage}</p>
           </div>
         )}
       </section>
