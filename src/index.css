@@ -958,3 +958,13 @@ body {
     width: 100%;
   }
 }
+
+.task-toolbar .danger-button {
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .task-toolbar .danger-button {
+    width: 100%;
+  }
+}

@@ -378,3 +378,47 @@ AI helped structure the Context API module and explain global UI state. I manual
 
 ### AI usage reflection
 AI helped structure the reducer refactor and explain reducer-based state management. I manually implemented the reducer, updated task handlers to dispatch actions, added the clear completed feature, and tested the existing task, route, API, and theme functionality before documenting and committing the step.
+
+---
+
+## Step 10 — Custom Hooks & LocalStorage
+
+### What I used AI for
+- Planning the custom hooks and persistence module.
+- Understanding how to create reusable custom hooks.
+- Learning how to persist React state with `localStorage`.
+- Understanding lazy initial state.
+- Learning why `JSON.stringify` and `JSON.parse` are needed.
+- Creating interview-style notes for custom hooks and localStorage.
+
+### What I implemented myself
+- Created the `useLocalStorageState` hook.
+- Created the `useTasks` hook.
+- Moved task reducer and persistence logic out of `App.tsx`.
+- Persisted task state in `localStorage`.
+- Persisted theme preference in `localStorage`.
+- Added a reset saved tasks action.
+- Tested refresh behaviour for tasks and theme.
+- Confirmed existing routes and features still worked.
+
+### What I learned
+- Custom hooks extract reusable stateful logic.
+- `localStorage` stores string values in the browser.
+- Objects and arrays need `JSON.stringify` before saving.
+- Saved JSON strings need `JSON.parse` when loading.
+- Lazy initial state prevents unnecessary storage reads on every render.
+- `useEffect` can sync state changes to localStorage.
+- Persistence logic should be centralised instead of duplicated across components.
+
+### What I should be able to explain in an interview
+- What custom hooks are.
+- Why custom hooks start with `use`.
+- How localStorage persistence works.
+- Why JSON conversion is needed.
+- What lazy initial state means.
+- How to sync state to localStorage with `useEffect`.
+- Why reusable logic was moved into `useTasks`.
+- What data should and should not be stored in localStorage.
+
+### AI usage reflection
+AI helped structure the persistence module and explain custom hooks, lazy initial state, and localStorage syncing. I manually implemented the hooks, connected them to tasks and theme, and tested refresh persistence before documenting and committing the step.

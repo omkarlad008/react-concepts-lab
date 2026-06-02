@@ -28,6 +28,10 @@ export function ConceptsPage() {
     "Action objects",
     "Dispatch",
     "Pure state updates",
+    "Custom hooks",
+    "localStorage",
+    "Persistent state",
+    "Lazy initial state",
   ];
 
   return (

@@ -2,14 +2,12 @@ import {
   createContext,
   useContext,
   useEffect,
-  useState,
   type ReactNode,
 } from "react";
+import { useLocalStorageState } from "../hooks/useLocalStorageState";
 
 /**
  * Theme limits the app theme to only two valid values.
- *
- * This prevents invalid theme values like "blue", "system", or "random".
  */
 type Theme = "light" | "dark";
 
@@ -23,28 +21,22 @@ type ThemeProviderProps = {
   children: ReactNode;
 };
 
-/**
- * ThemeContext stores global theme data.
- *
- * The initial value is undefined because the real value will come
- * from ThemeProvider.
- */
+const THEME_STORAGE_KEY = "react-concepts-lab-theme";
+
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 /**
  * ThemeProvider owns the global theme state.
  *
- * Any component inside this provider can access the theme by using useTheme().
+ * In Step 10, theme state is now persisted using the reusable
+ * useLocalStorageState custom hook.
  */
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useLocalStorageState<Theme>(
+    THEME_STORAGE_KEY,
+    "light",
+  );
 
-  /**
-   * This effect syncs React theme state with the HTML document.
-   *
-   * CSS can then read data-theme="light" or data-theme="dark"
-   * and apply the correct visual styles.
-   */
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -68,8 +60,6 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
 /**
  * useTheme is a small helper hook for reading ThemeContext.
- *
- * It also protects us from using the context outside ThemeProvider.
  */
 export function useTheme() {
   const context = useContext(ThemeContext);

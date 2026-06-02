@@ -11,13 +11,13 @@ type DashboardPageProps = {
   onToggleTask: (taskId: string) => void;
   onDeleteTask: (taskId: string) => void;
   onClearCompletedTasks: () => void;
+  onResetTasks: () => void;
 };
 
 /**
  * DashboardPage displays the task dashboard.
  *
- * The main task state is now managed by useReducer in App.tsx.
- * DashboardPage receives task data and dispatch helper functions through props.
+ * Task state is now persisted through the useTasks custom hook in App.tsx.
  */
 export function DashboardPage({
   tasks,
@@ -25,6 +25,7 @@ export function DashboardPage({
   onToggleTask,
   onDeleteTask,
   onClearCompletedTasks,
+  onResetTasks,
 }: DashboardPageProps) {
   const [selectedFilter, setSelectedFilter] = useState<TaskFilter>("all");
 
@@ -33,12 +34,6 @@ export function DashboardPage({
 
   const hasCompletedTasks = completedTasksCount > 0;
 
-  /**
-   * filteredTasks is still derived from tasks + selectedFilter.
-   *
-   * useReducer changes how tasks are updated,
-   * but it does not change how filtered data is calculated.
-   */
   const filteredTasks = tasks.filter((task) => {
     if (selectedFilter === "active") {
       return !task.isCompleted;
@@ -67,8 +62,8 @@ export function DashboardPage({
     {
       id: "concepts",
       title: "Concepts",
-      value: "21",
-      description: "React concepts practised across the first nine modules.",
+      value: "24",
+      description: "React concepts practised across the first ten modules.",
     },
     {
       id: "active-tasks",
@@ -80,18 +75,18 @@ export function DashboardPage({
       id: "completed-tasks",
       title: "Completed",
       value: String(completedTasksCount),
-      description: "Tasks marked as completed using reducer actions.",
+      description: "Tasks saved locally after completion.",
     },
   ];
 
   return (
     <section className="dashboard-page">
       <div className="page-intro">
-        <p className="eyebrow">Module 9</p>
-        <h2>useReducer & Task State Refactor</h2>
+        <p className="eyebrow">Module 10</p>
+        <h2>Custom Hooks & LocalStorage</h2>
         <p>
-          This step moves task update logic into a reducer so related state
-          changes are handled in one predictable place.
+          This step persists tasks and theme settings in the browser using
+          custom hooks and localStorage.
         </p>
       </div>
 
@@ -114,7 +109,7 @@ export function DashboardPage({
             <p className="eyebrow">Practice</p>
             <h2>Module Tasks</h2>
             <p className="section-description">
-              Task updates are now handled through reducer actions.
+              Tasks now stay saved after refreshing the browser.
             </p>
           </div>
 
@@ -131,6 +126,14 @@ export function DashboardPage({
               disabled={!hasCompletedTasks}
             >
               Clear completed
+            </button>
+
+            <button
+              type="button"
+              className="danger-button"
+              onClick={onResetTasks}
+            >
+              Reset saved tasks
             </button>
           </div>
         </div>
