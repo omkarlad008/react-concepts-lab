@@ -10,29 +10,34 @@ type DashboardPageProps = {
   onAddTask: (task: Task) => void;
   onToggleTask: (taskId: string) => void;
   onDeleteTask: (taskId: string) => void;
+  onClearCompletedTasks: () => void;
 };
 
 /**
  * DashboardPage displays the task dashboard.
  *
- * The main tasks state now lives in App.tsx.
- * DashboardPage receives tasks and task update functions through props.
+ * The main task state is now managed by useReducer in App.tsx.
+ * DashboardPage receives task data and dispatch helper functions through props.
  */
 export function DashboardPage({
   tasks,
   onAddTask,
   onToggleTask,
   onDeleteTask,
+  onClearCompletedTasks,
 }: DashboardPageProps) {
   const [selectedFilter, setSelectedFilter] = useState<TaskFilter>("all");
 
   const completedTasksCount = tasks.filter((task) => task.isCompleted).length;
   const activeTasksCount = tasks.length - completedTasksCount;
 
+  const hasCompletedTasks = completedTasksCount > 0;
+
   /**
-   * filteredTasks is derived from tasks + selectedFilter.
+   * filteredTasks is still derived from tasks + selectedFilter.
    *
-   * We keep the original task list unchanged.
+   * useReducer changes how tasks are updated,
+   * but it does not change how filtered data is calculated.
    */
   const filteredTasks = tasks.filter((task) => {
     if (selectedFilter === "active") {
@@ -62,8 +67,8 @@ export function DashboardPage({
     {
       id: "concepts",
       title: "Concepts",
-      value: "18",
-      description: "React concepts practised across the first six modules.",
+      value: "21",
+      description: "React concepts practised across the first nine modules.",
     },
     {
       id: "active-tasks",
@@ -75,18 +80,18 @@ export function DashboardPage({
       id: "completed-tasks",
       title: "Completed",
       value: String(completedTasksCount),
-      description: "Tasks marked as completed using React state.",
+      description: "Tasks marked as completed using reducer actions.",
     },
   ];
 
   return (
     <section className="dashboard-page">
       <div className="page-intro">
-        <p className="eyebrow">Module 6</p>
-        <h2>URL Params & Task Detail Pages</h2>
+        <p className="eyebrow">Module 9</p>
+        <h2>useReducer & Task State Refactor</h2>
         <p>
-          This step connects tasks to detail pages using dynamic routes like
-          /tasks/:taskId.
+          This step moves task update logic into a reducer so related state
+          changes are handled in one predictable place.
         </p>
       </div>
 
@@ -109,14 +114,25 @@ export function DashboardPage({
             <p className="eyebrow">Practice</p>
             <h2>Module Tasks</h2>
             <p className="section-description">
-              Open a task to view its route-based detail page.
+              Task updates are now handled through reducer actions.
             </p>
           </div>
 
-          <TaskFilterControls
-            selectedFilter={selectedFilter}
-            onFilterChange={setSelectedFilter}
-          />
+          <div className="task-toolbar">
+            <TaskFilterControls
+              selectedFilter={selectedFilter}
+              onFilterChange={setSelectedFilter}
+            />
+
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={onClearCompletedTasks}
+              disabled={!hasCompletedTasks}
+            >
+              Clear completed
+            </button>
+          </div>
         </div>
 
         {filteredTasks.length > 0 ? (

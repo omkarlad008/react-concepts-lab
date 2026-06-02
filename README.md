@@ -86,6 +86,14 @@ The goal of this project is to learn React deeply by implementing one concept at
 - Prop drilling
 - Theme state
 - CSS variables
+-
+- `useReducer`
+- Reducer function
+- Action objects
+- Dispatch
+- Discriminated union types
+- Pure state updates
+- Centralised state logic
 
 
 More concepts will be added step by step.

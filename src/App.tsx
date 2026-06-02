@@ -1,44 +1,56 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppShell } from "./components/layout/AppShell";
 import { ThemeProvider } from "./context/ThemeContext";
+import { initialTasks } from "./data/initialTasks";
+import { tasksReducer } from "./reducers/tasksReducer";
+import { ApiPracticePage } from "./pages/ApiPracticePage";
 import { ConceptsPage } from "./pages/ConceptsPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { NotesPage } from "./pages/NotesPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { TaskDetailPage } from "./pages/TaskDetailPage";
-import { ApiPracticePage } from "./pages/ApiPracticePage";
-import { initialTasks } from "./data/initialTasks";
 import type { Task } from "./types/task";
 
 /**
  * App is the root component of our React application.
  *
- * App owns task state.
- * ThemeProvider owns global theme state.
+ * In Step 9, task state is managed with useReducer instead of useState.
+ * This keeps all task update logic inside one reducer function.
  */
 function App() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
   function handleAddTask(newTask: Task) {
-    setTasks((currentTasks) => [newTask, ...currentTasks]);
+    dispatch({
+      type: "add_task",
+      payload: newTask,
+    });
   }
 
   function handleToggleTask(taskId: string) {
-    setTasks((currentTasks) =>
-      currentTasks.map((task) =>
-        task.id === taskId
-          ? { ...task, isCompleted: !task.isCompleted }
-          : task,
-      ),
-    );
+    dispatch({
+      type: "toggle_task",
+      payload: {
+        taskId,
+      },
+    });
   }
 
   function handleDeleteTask(taskId: string) {
-    setTasks((currentTasks) =>
-      currentTasks.filter((task) => task.id !== taskId),
-    );
+    dispatch({
+      type: "delete_task",
+      payload: {
+        taskId,
+      },
+    });
+  }
+
+  function handleClearCompletedTasks() {
+    dispatch({
+      type: "clear_completed",
+    });
   }
 
   return (
@@ -54,6 +66,7 @@ function App() {
                   onAddTask={handleAddTask}
                   onToggleTask={handleToggleTask}
                   onDeleteTask={handleDeleteTask}
+                  onClearCompletedTasks={handleClearCompletedTasks}
                 />
               }
             />

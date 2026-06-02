@@ -336,3 +336,45 @@ AI helped structure the API practice module and explain side effects, dependency
 
 ### AI usage reflection
 AI helped structure the Context API module and explain global UI state. I manually implemented the provider, custom hook, settings controls, header badge, and CSS theme variables, then tested theme changes across the app before documenting and committing the step.
+
+---
+
+## Step 9 — useReducer & Task State Refactor
+
+### What I used AI for
+- Planning the `useReducer` refactor.
+- Understanding when `useReducer` is better than `useState`.
+- Learning how reducer functions, action objects, and dispatch work.
+- Understanding discriminated union types in TypeScript.
+- Creating interview-style notes for reducer-based state management.
+
+### What I implemented myself
+- Created the `tasksReducer`.
+- Created the `TaskAction` discriminated union type.
+- Replaced task `useState` with `useReducer`.
+- Updated task handlers to dispatch actions.
+- Added the `clear_completed` reducer action.
+- Added the Clear completed button to the dashboard.
+- Tested add, toggle, delete, filter, detail page, and clear completed behaviour.
+
+### What I learned
+- `useReducer` is useful for complex or related state updates.
+- A reducer receives current state and an action, then returns next state.
+- Actions describe what happened.
+- `dispatch` sends actions to the reducer.
+- Reducers should be pure and should not mutate existing state.
+- Discriminated union types make reducer actions safer in TypeScript.
+- Centralising task update logic makes the app easier to maintain.
+
+### What I should be able to explain in an interview
+- What `useReducer` is.
+- What a reducer function does.
+- What an action object is.
+- How `dispatch` works.
+- Why reducers should be pure.
+- When to choose `useReducer` over `useState`.
+- How TypeScript discriminated unions help reducer actions.
+- How the clear completed action works.
+
+### AI usage reflection
+AI helped structure the reducer refactor and explain reducer-based state management. I manually implemented the reducer, updated task handlers to dispatch actions, added the clear completed feature, and tested the existing task, route, API, and theme functionality before documenting and committing the step.

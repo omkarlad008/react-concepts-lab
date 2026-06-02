@@ -23,6 +23,11 @@ export function ConceptsPage() {
     "Provider",
     "useContext",
     "Global UI state",
+    "useReducer",
+    "Reducer function",
+    "Action objects",
+    "Dispatch",
+    "Pure state updates",
   ];
 
   return (

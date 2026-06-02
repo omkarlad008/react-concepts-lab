@@ -934,3 +934,27 @@ body {
     width: 100%;
   }
 }
+
+.task-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 760px) {
+  .task-toolbar {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .task-toolbar .task-filter-controls,
+  .task-toolbar .secondary-button {
+    width: 100%;
+  }
+}
