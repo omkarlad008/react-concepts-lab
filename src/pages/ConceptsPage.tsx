@@ -36,6 +36,10 @@ export function ConceptsPage() {
     "useCallback",
     "React.memo",
     "Referential equality",
+    "Vitest",
+    "React Testing Library",
+    "Unit testing",
+    "Component testing",
   ];
 
   return (

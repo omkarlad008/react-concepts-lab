@@ -15,6 +15,8 @@ The goal of this project is to learn React deeply by implementing one concept at
 - CSS
 - Fetch API
 - Browser localStorage
+- Vitest
+- React Testing Library
 - Git and GitHub
 
 ## Concepts Covered
@@ -111,6 +113,14 @@ The goal of this project is to learn React deeply by implementing one concept at
 - Stable function references
 - Unnecessary re-renders
 - Memoised derived values
+-
+- Vitest
+- React Testing Library
+- Unit testing
+- Component testing
+- Mock functions
+- User interaction testing
+- Testing accessible roles
 
 More concepts will be added step by step.
 
@@ -145,6 +155,39 @@ http://localhost:5173
 - `/settings` — Context API and theme settings
 - `/tasks/:taskId` — Dynamic task detail page
 - `*` — Not Found page
+
+## Testing
+
+This project uses **Vitest** and **React Testing Library** for automated testing.
+
+Run all tests:
+
+```bash
+npm test
+```
+
+Run tests in watch mode:
+
+```bash
+npm run test:watch
+```
+
+Current test coverage includes:
+
+- Task reducer logic
+- Task filter controls
+- Dashboard filtering behaviour
+- Clear completed callback behaviour
+
+Test files included:
+
+```txt
+src/reducers/tasksReducer.test.ts
+src/components/tasks/TaskFilterControls.test.tsx
+src/pages/DashboardPage.test.tsx
+```
+
+The tests focus on meaningful behaviour instead of internal implementation details.
 
 ## Learning Workflow
 

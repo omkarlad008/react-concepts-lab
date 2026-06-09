@@ -467,3 +467,51 @@ AI helped structure the persistence module and explain custom hooks, lazy initia
 
 ### AI usage reflection
 AI helped structure the performance optimisation step and explain memoisation concepts. I manually applied `useMemo`, `useCallback`, and `React.memo`, then tested all existing project features to confirm the optimisation did not break functionality.
+
+---
+
+## Step 12 — Testing with Vitest & React Testing Library
+
+### What I used AI for
+- Planning the testing module.
+- Understanding the difference between Vitest and React Testing Library.
+- Learning how to test reducer logic.
+- Learning how to test user-facing component behaviour.
+- Understanding how to use `MemoryRouter` for route-related components.
+- Fixing a test query issue where multiple elements had the same text.
+- Creating interview-style notes for automated testing.
+
+### What I implemented myself
+- Installed Vitest and React Testing Library packages.
+- Added test scripts to `package.json`.
+- Configured Vitest with jsdom.
+- Created the test setup file.
+- Added reducer tests for task state actions.
+- Added component tests for task filter controls.
+- Added dashboard behaviour tests.
+- Ran and fixed the test suite.
+- Confirmed all tests pass.
+- Confirmed the app still builds successfully.
+
+### What I learned
+- Vitest runs the test suite.
+- React Testing Library tests React components from the user’s point of view.
+- Reducers are good candidates for unit testing because they are pure functions.
+- Component tests should focus on visible behaviour.
+- `userEvent` simulates user interactions.
+- Mock functions can verify callback behaviour.
+- `MemoryRouter` provides routing context during tests.
+- Queries should be specific when multiple elements have similar text.
+
+### What I should be able to explain in an interview
+- What automated testing is.
+- What Vitest is used for.
+- What React Testing Library is used for.
+- How to test reducer logic.
+- How to test component behaviour.
+- Why testing user behaviour is better than testing implementation details.
+- How to use mock functions.
+- Why route-based components need router context in tests.
+
+### AI usage reflection
+AI helped structure the testing setup and explain testing concepts. I manually installed the packages, added the tests, ran the test suite, fixed the duplicate text query issue, and verified that all tests and the production build passed.
