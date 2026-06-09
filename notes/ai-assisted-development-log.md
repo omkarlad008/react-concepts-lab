@@ -515,3 +515,44 @@ AI helped structure the performance optimisation step and explain memoisation co
 
 ### AI usage reflection
 AI helped structure the testing setup and explain testing concepts. I manually installed the packages, added the tests, ran the test suite, fixed the duplicate text query issue, and verified that all tests and the production build passed.
+
+---
+
+## Step 13 — Final Polish, Accessibility Review & Portfolio README
+
+### What I used AI for
+- Planning the final polish step.
+- Understanding basic accessibility improvements.
+- Creating a skip link implementation.
+- Structuring a portfolio-ready project summary.
+- Creating interview-style notes for accessibility and documentation.
+
+### What I implemented myself
+- Added a skip to main content link.
+- Added the `main-content` target to the main layout.
+- Added visible focus styles.
+- Updated the Concepts page with final concepts.
+- Created `PROJECT_SUMMARY.md`.
+- Added project summary and accessibility notes to the README.
+- Tested keyboard focus behaviour.
+- Confirmed tests and production build still pass.
+
+### What I learned
+- Accessibility improves usability for keyboard and assistive technology users.
+- Skip links help keyboard users bypass repeated navigation.
+- Visible focus styles are important for keyboard navigation.
+- Semantic structure makes pages easier to understand.
+- Portfolio documentation helps explain project value clearly.
+- A final project summary helps prepare for interviews and GitHub review.
+
+### What I should be able to explain in an interview
+- What accessibility means.
+- What a skip link is.
+- Why visible focus styles matter.
+- How semantic HTML improves accessibility.
+- What final polish was added to the project.
+- How this project demonstrates core React skills.
+- How the README and project summary support portfolio presentation.
+
+### AI usage reflection
+AI helped organise the final accessibility and portfolio polish step. I manually implemented the skip link, focus styles, project summary, README updates, and final checks before committing the completed project.

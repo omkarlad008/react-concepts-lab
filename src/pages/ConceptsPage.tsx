@@ -1,8 +1,7 @@
 /**
- * ConceptsPage lists the React concepts completed so far.
+ * ConceptsPage lists the React concepts completed in the project.
  *
- * This page is static for now.
- * Later, we can turn this into a more interactive learning tracker.
+ * This page acts as a learning tracker and portfolio summary.
  */
 export function ConceptsPage() {
   const concepts = [
@@ -40,16 +39,18 @@ export function ConceptsPage() {
     "React Testing Library",
     "Unit testing",
     "Component testing",
+    "Accessibility basics",
+    "Portfolio documentation",
   ];
 
   return (
-    <section className="content-page">
+    <section className="content-page" aria-labelledby="concepts-heading">
       <div className="page-intro">
         <p className="eyebrow">Concepts</p>
-        <h2>React Concepts Covered</h2>
+        <h2 id="concepts-heading">React Concepts Covered</h2>
         <p>
-          This page tracks the concepts we have practised so far in the React
-          Concepts Lab project.
+          This page tracks the concepts practised in the React Concepts Lab
+          project.
         </p>
       </div>
 

@@ -203,3 +203,23 @@ For each concept:
 ## AI-Assisted Development
 
 AI is used as a mentor, reviewer, and debugging assistant. The project is not built blindly with AI. Every accepted suggestion must be understood and explainable.
+
+## Project Summary
+
+React Concepts Lab is a practical React + TypeScript learning project built to revise and demonstrate core React concepts through a working task and learning dashboard.
+
+The project includes task management, routing, dynamic task detail pages, API calls, global theme settings, localStorage persistence, reducer-based state management, performance optimisation, and automated tests.
+
+A detailed project summary is available in [`PROJECT_SUMMARY.md`](./PROJECT_SUMMARY.md).
+
+## Accessibility Notes
+
+Basic accessibility improvements include:
+
+- Semantic page structure
+- Main navigation with accessible labels
+- Keyboard-accessible buttons and links
+- Visible focus styles
+- Skip to main content link
+- Form labels for inputs
+- Accessible role-based testing queries

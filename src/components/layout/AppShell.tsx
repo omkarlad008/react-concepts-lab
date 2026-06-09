@@ -18,9 +18,13 @@ type AppShellProps = {
 export function AppShell({ children }: AppShellProps) {
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
+
       <AppHeader />
 
-      <main className="app-main">{children}</main>
+      <main id="main-content" className="app-main">{children}</main>
     </div>
   );
 }
