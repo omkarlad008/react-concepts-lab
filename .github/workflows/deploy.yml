@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy React Concepts Lab to GitHub Pages
 
 on:
   push:

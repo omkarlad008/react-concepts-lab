@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppShell } from "./components/layout/AppShell";
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeProvider } from "./context/ThemeProvider";
 import { useTasks } from "./hooks/useTasks";
 import { ApiPracticePage } from "./pages/ApiPracticePage";
 import { ConceptsPage } from "./pages/ConceptsPage";
