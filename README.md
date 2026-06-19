@@ -6,6 +6,10 @@ React Concepts Lab is a learning-focused React project built to practise core Re
 
 The goal of this project is to learn React deeply by implementing one concept at a time, writing notes, and committing each completed step to GitHub.
 
+## Live Link
+
+https://omkarlad008.github.io/react-concepts-lab/
+
 ## Tech Stack
 
 - React
